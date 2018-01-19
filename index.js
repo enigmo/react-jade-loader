@@ -9,9 +9,9 @@ module.exports = function(source){
   this.cacheable && this.cacheable();
   
   var filepath = loaderUtils.getRemainingRequest(this).replace(/^!/, "");
-  var query = loaderUtils.parseQuery(this.query);
+  var query = loaderUtils.getOptions(this);
   
-  if(query.split){
+  if(query && query.split){
     var chunks = source.split(/\n*?\/\/ react: (\w+)\s*\n/);
     chunks.shift();
     if(!chunks.length) return single();
